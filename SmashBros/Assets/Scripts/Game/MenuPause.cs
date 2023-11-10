@@ -12,6 +12,10 @@ public class MenuPause : MonoBehaviour
             Time.timeScale = 0;
         }
     }
+    public void Replay()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
     public void Continue()
     {
         Time.timeScale = 1.0f;
