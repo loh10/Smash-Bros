@@ -8,11 +8,13 @@ using UnityEngine.InputSystem;
 public class MultiplayerManager : MonoBehaviour
 {
     public static int playerIndex;
+    private bool[] spawnPointsOccupied;
     public Transform[] spawnPoints;
 
     private void Awake()
     {
         playerIndex = 0;
+        spawnPointsOccupied = new bool[spawnPoints.Length];
     }
 
     public void setSpawns(PlayerInput playerInput)
@@ -20,12 +22,28 @@ public class MultiplayerManager : MonoBehaviour
         playerIndex++;
         Debug.Log("Player joined. Player index: " + playerIndex);
 
-        int spawnIndex = (playerIndex - 0) % spawnPoints.Length;
-        Transform spawnPoint = spawnPoints[spawnIndex];
+        int spawnIndex = GetNextAvailableSpawnIndex();
+        if (spawnIndex != -1)
+        {
+            Transform spawnPoint = spawnPoints[spawnIndex];
+            spawnPointsOccupied[spawnIndex] = true;
 
-        Debug.Log("Spawn Index: " + spawnIndex);
-        Debug.Log("Spawn Point: " + spawnPoint.position);
+            playerInput.transform.position = spawnPoint.position;
+            Debug.Log("Player joined. Player index: " + playerIndex + ". Spawn index: " + spawnIndex);
+        }
+    }
 
-        playerInput.transform.position = spawnPoint.position;
+    private int GetNextAvailableSpawnIndex()
+    {
+        for (int i = 0; i < spawnPointsOccupied.Length; i++)
+        {
+            if (!spawnPointsOccupied[i])
+            {
+                return i;
+            }
+        }
+        
+        return -1;
     }
 }
+
