@@ -4,21 +4,26 @@ using UnityEngine;
 
 public class expulsionPercentage : MonoBehaviour
 {
-    private int characterExpulsionPercentage = 75;
+    private float characterExpulsionPercentage = 75;
 
-    public int getCharacterExpulsionPercentage()
+    public float getCharacterExpulsionPercentage()
     {
         return characterExpulsionPercentage;
     }
 
-    public void setCharacterExpulsionPercentage(int newPercentage)
+    public void setCharacterExpulsionPercentage(float newPercentage)
     {
         characterExpulsionPercentage = newPercentage;
     }
 
-    public void addCharacterExpulsionPercentage(int percentageToAdd)
+    public void addCharacterExpulsionPercentage(float percentageToAdd)
     {
         characterExpulsionPercentage += percentageToAdd;
+    }
+
+    void Update()
+    {
+        Debug.Log(this.gameObject.name + " = " + characterExpulsionPercentage);
     }
 
 }

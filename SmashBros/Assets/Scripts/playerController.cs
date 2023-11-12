@@ -14,12 +14,19 @@ public class playerController : MonoBehaviour
     }
     public void onMove(InputAction.CallbackContext context)
     {
-        c.move();
+        Vector2 inputValue = context.ReadValue<Vector2>();
+        if(context.performed)
+        {
+            c.move(inputValue);
+        }
+        else if (context.canceled)
+        {
+            c.stopMove();
+        }
     }
 
     public void onJump(InputAction.CallbackContext context)
     {
-
         if(context.started)
         {
             c.Jump();
@@ -28,6 +35,30 @@ public class playerController : MonoBehaviour
         {
             c.stopJump();
         }
+    }
 
+    public void onWestButton(InputAction.CallbackContext context)
+    {
+        if(context.started)
+        {
+            c.simpleAttack();
+        }
+    }
+
+    public void onEastButton(InputAction.CallbackContext context)
+    {
+        if(context.started)
+        {
+            c.bigAttack();
+        }
+    }
+
+      
+    public void onNorthButton(InputAction.CallbackContext context)
+    {
+        if(context.started)
+        {
+            c.swapPosition();
+        }
     }
 }
