@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 //using System.Numerics;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
@@ -35,7 +36,9 @@ public class character : MonoBehaviour
     private bool isBigAttack = false;
     private bool isJumpAttack = false;
     private float lastHitTime = -2f;
-
+    [Header("Donne le text")]
+    MultiplayerManager mpm;
+    public Text percent;
     private enum characterState
 {
     Void,
@@ -44,10 +47,14 @@ public class character : MonoBehaviour
     Stun,
     Ejection
 }
-
+    private void Awake()
+    {
+        mpm = GameObject.Find("EventManager").GetComponent<MultiplayerManager>();
+        _expulsionPercentage = GetComponent<expulsionPercentage>();
+        percent = GameObject.Find("P" + mpm.Nbplayer + " %").GetComponent<Text>();
+    }
     void Start()
     {
-        _expulsionPercentage = GetComponent<expulsionPercentage>();
         remainingJumps = 2;
         rb = GetComponent<Rigidbody2D>();
     }
@@ -71,28 +78,27 @@ public class character : MonoBehaviour
             switch (_powerOffset)
             {
                 default:
-                hitPercentage = UnityEngine.Random.Range(0.5f,1f);
+                hitPercentage = UnityEngine.Random.Range(5,10);
                 break;
 
                 case 1:
-                hitPercentage = UnityEngine.Random.Range(0.5f,1f);
+                hitPercentage = UnityEngine.Random.Range(5f,10f);
                 break;
 
                 case 2:
-                hitPercentage = UnityEngine.Random.Range(1.5f,3f);
+                hitPercentage = UnityEngine.Random.Range(15f,30f);
                 break;
             }
-
-
             _expulsionPercentage.addCharacterExpulsionPercentage(hitPercentage);
             addForceByhit(_powerOffset, hitDirection);
             lastHitTime = currentTimer;
         }
+        percent.text = _expulsionPercentage.characterExpulsionPercentage.ToString("###") + ".%";
     }
 
     private void addForceByhit(int _powerOffset, Vector3 hitDirection)
     {
-        rb.AddForce(hitDirection * (((_powerOffset * (_expulsionPercentage.getCharacterExpulsionPercentage()*8)))), ForceMode2D.Force);
+        rb.AddForce(hitDirection * (((_powerOffset * (_expulsionPercentage.getCharacterExpulsionPercentage()*80)))), ForceMode2D.Force);
     }
 
     public void move(Vector2 inputAxis)
@@ -274,6 +280,7 @@ public class character : MonoBehaviour
         Collider2D rightHit = Physics2D.OverlapBox(rightArm.transform.position, rightArm.size, LayerMask.GetMask("Player"));
         if (leftHit != null || rightHit != null)
         {
+            print("attack");
             if(leftHit.gameObject != this.gameObject)
             {
                 sendHit(leftHit.gameObject.GetComponent<character>(), lastMoveValue);

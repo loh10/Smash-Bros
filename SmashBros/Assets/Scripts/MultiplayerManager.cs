@@ -10,6 +10,7 @@ public class MultiplayerManager : MonoBehaviour
     public static int playerIndex;
     private bool[] spawnPointsOccupied;
     public Transform[] spawnPoints;
+    public int Nbplayer;
 
     private void Awake()
     {
@@ -19,8 +20,10 @@ public class MultiplayerManager : MonoBehaviour
 
     public void setSpawns(PlayerInput playerInput)
     {
+        
         playerIndex++;
-        Debug.Log("Player joined. Player index: " + playerIndex);
+        Nbplayer = playerIndex;
+        //Debug.Log("Player joined. Player index: " + playerIndex);
 
         int spawnIndex = GetNextAvailableSpawnIndex();
         if (spawnIndex != -1)
@@ -29,7 +32,7 @@ public class MultiplayerManager : MonoBehaviour
             spawnPointsOccupied[spawnIndex] = true;
 
             playerInput.transform.position = spawnPoint.position;
-            Debug.Log("Player joined. Player index: " + playerIndex + ". Spawn index: " + spawnIndex);
+            //Debug.Log("Player joined. Player index: " + playerIndex + ". Spawn index: " + spawnIndex);
         }
     }
 
