@@ -58,8 +58,11 @@ public class character : MonoBehaviour
         remainingJumps = 2;
         rb = GetComponent<Rigidbody2D>();
     }
+    private void Update()
+    {
+        percent.text = _expulsionPercentage.characterExpulsionPercentage.ToString("###") + " %";
+    }
 
-    
     private void sendHit(character ennemieHitted, Vector3 hitDirection)
     {
         if(ennemieHitted != null)
@@ -71,34 +74,34 @@ public class character : MonoBehaviour
 
     public void hitReceveid(int _powerOffset, Vector3 hitDirection)
     {
-        float currentTimer = Time.time;
+        float currentTimer = Time.deltaTime;
         if (currentTimer - lastHitTime >= 0.1f)
         {
+            print("attack");
             float hitPercentage = 0;
             switch (_powerOffset)
             {
                 default:
-                hitPercentage = UnityEngine.Random.Range(5,10);
+                hitPercentage = 5;
                 break;
 
                 case 1:
-                hitPercentage = UnityEngine.Random.Range(5f,10f);
+                hitPercentage = 10;
                 break;
 
                 case 2:
-                hitPercentage = UnityEngine.Random.Range(15f,30f);
+                hitPercentage = 13;
                 break;
             }
             _expulsionPercentage.addCharacterExpulsionPercentage(hitPercentage);
             addForceByhit(_powerOffset, hitDirection);
             lastHitTime = currentTimer;
         }
-        percent.text = _expulsionPercentage.characterExpulsionPercentage.ToString("###") + ".%";
     }
 
     private void addForceByhit(int _powerOffset, Vector3 hitDirection)
     {
-        rb.AddForce(hitDirection * (((_powerOffset * (_expulsionPercentage.getCharacterExpulsionPercentage()*80)))), ForceMode2D.Force);
+        rb.AddForce(hitDirection * (((_powerOffset * (_expulsionPercentage.getCharacterExpulsionPercentage()*8)))), ForceMode2D.Force);
     }
 
     public void move(Vector2 inputAxis)
@@ -280,7 +283,6 @@ public class character : MonoBehaviour
         Collider2D rightHit = Physics2D.OverlapBox(rightArm.transform.position, rightArm.size, LayerMask.GetMask("Player"));
         if (leftHit != null || rightHit != null)
         {
-            print("attack");
             if(leftHit.gameObject != this.gameObject)
             {
                 sendHit(leftHit.gameObject.GetComponent<character>(), lastMoveValue);

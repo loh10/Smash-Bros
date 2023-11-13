@@ -9,6 +9,7 @@ public class ViePlayer : MonoBehaviour
     public MultiplayerManager mpm;
     int currentLife = 3;
     public List<Transform> Vie;
+
     private void Awake()
     {
         mpm = GameObject.Find("EventManager").GetComponent<MultiplayerManager>();
@@ -36,6 +37,8 @@ public class ViePlayer : MonoBehaviour
             else
             {
                 print(currentLife);
+                this.gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+                this.gameObject.GetComponent<expulsionPercentage>().setCharacterExpulsionPercentage(0);
                 currentLife--;
                 UpdateLife();
                 this.gameObject.transform.position = Vector3.zero;

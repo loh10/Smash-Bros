@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class expulsionPercentage : MonoBehaviour
 {
-    public float characterExpulsionPercentage = 75;
+    public float characterExpulsionPercentage;
 
     public float getCharacterExpulsionPercentage()
     {
