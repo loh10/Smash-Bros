@@ -21,7 +21,7 @@ public class MenuManager : MonoBehaviour
     private void SaveOption()
     {
         dataTransfer.maxJumpHeight = (int)reglage[0].value;
-        dataTransfer.jumpTime = (int)reglage[1].value;
+        dataTransfer.maxJumpTime = (int)reglage[1].value;
         int volume = (int)reglage[2].value;
         dataTransfer.ejectionDistance = (int)reglage[3].value;
         dataTransfer.stuntTime = (int)reglage[4].value;
