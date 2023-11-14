@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class ViePlayer : MonoBehaviour
@@ -9,6 +10,7 @@ public class ViePlayer : MonoBehaviour
     public MultiplayerManager mpm;
     int currentLife = 3;
     public List<Transform> Vie;
+    public bool dead;
 
     private void Awake()
     {
@@ -31,14 +33,16 @@ public class ViePlayer : MonoBehaviour
             if (currentLife == 1)
             {
                 clearLife();
-                this.gameObject.SetActive(false);
-                print("mort");
+                DesactivateInput(this.GetComponent<PlayerInput>());
+                this.gameObject.transform.position = new Vector2(1000, 1000);
+                Destroy(this.gameObject.GetComponent<Rigidbody2D>());
+                this.gameObject.tag = "Dead";
+                dead = true;
             }
             else
             {
-                print(currentLife);
                 this.gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-                this.gameObject.GetComponent<expulsionPercentage>().setCharacterExpulsionPercentage(0);
+                dead = true;
                 currentLife--;
                 UpdateLife();
                 this.gameObject.transform.position = Vector3.zero;
@@ -46,6 +50,10 @@ public class ViePlayer : MonoBehaviour
         }
     }
 
+    void DesactivateInput(PlayerInput playerInput)
+    {
+        playerInput.DeactivateInput();
+    }
     private void UpdateLife()
     {
         clearLife();

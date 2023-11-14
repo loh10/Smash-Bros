@@ -36,9 +36,10 @@ public class character : MonoBehaviour
     private bool isBigAttack = false;
     private bool isJumpAttack = false;
     private float lastHitTime = -2f;
-    [Header("Donne le text")]
-    MultiplayerManager mpm;
-    public Text percent;
+    [Header("pourcentage perso")]
+    int index;
+    Text percent;
+    ViePlayer vp;
     private enum characterState
 {
     Void,
@@ -47,61 +48,56 @@ public class character : MonoBehaviour
     Stun,
     Ejection
 }
+    
+    
     private void Awake()
     {
-        mpm = GameObject.Find("EventManager").GetComponent<MultiplayerManager>();
+        vp = GetComponent<ViePlayer>();
+        index = GameObject.Find("EventManager").GetComponent<MultiplayerManager>().playerIndex;
         _expulsionPercentage = GetComponent<expulsionPercentage>();
-        percent = GameObject.Find("P" + mpm.Nbplayer + " %").GetComponent<Text>();
-    }
-    void Start()
-    {
-        remainingJumps = 2;
+        percent = GameObject.Find("P" + index + " %").GetComponent<Text>();
         rb = GetComponent<Rigidbody2D>();
+        ApplyColor();
     }
-    private void Update()
-    {
-        percent.text = _expulsionPercentage.characterExpulsionPercentage.ToString("###") + " %";
-    }
-
     private void sendHit(character ennemieHitted, Vector3 hitDirection)
     {
+        
         if(ennemieHitted != null)
         {
-        ennemieHitted.hitReceveid(powerOffset, hitDirection);
+            ennemieHitted.hitReceveid(powerOffset, hitDirection);
         }
 
     }
 
     public void hitReceveid(int _powerOffset, Vector3 hitDirection)
     {
-        float currentTimer = Time.deltaTime;
-        if (currentTimer - lastHitTime >= 0.1f)
+        float hitPercentage = 0;
+        switch (_powerOffset)
         {
-            print("attack");
-            float hitPercentage = 0;
-            switch (_powerOffset)
-            {
-                default:
+            default:
                 hitPercentage = 5;
                 break;
 
-                case 1:
+            case 1:
                 hitPercentage = 10;
                 break;
 
-                case 2:
+            case 2:
                 hitPercentage = 13;
                 break;
-            }
-            _expulsionPercentage.addCharacterExpulsionPercentage(hitPercentage);
-            addForceByhit(_powerOffset, hitDirection);
-            lastHitTime = currentTimer;
         }
+        _expulsionPercentage.addCharacterExpulsionPercentage(hitPercentage);
+        DisplayPercent(_expulsionPercentage.getCharacterExpulsionPercentage()/10);
+        addForceByhit(_powerOffset, hitDirection);
+        
     }
-
+    public void DisplayPercent(float Addnb)
+    {
+        percent.text = ((int)(Addnb)).ToString() + " %";
+    }
     private void addForceByhit(int _powerOffset, Vector3 hitDirection)
     {
-        rb.AddForce(hitDirection * (((_powerOffset * (_expulsionPercentage.getCharacterExpulsionPercentage()*8)))), ForceMode2D.Force);
+        rb.AddForce(hitDirection * (((_powerOffset * (_expulsionPercentage.getCharacterExpulsionPercentage()*20)))), ForceMode2D.Force);
     }
 
     public void move(Vector2 inputAxis)
@@ -124,90 +120,90 @@ public class character : MonoBehaviour
         isMoving = false;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        if(isJumping)
+        print(vp.dead);
+        if(vp.dead)
         {
-            if(currentJumpTime < 0.5f)
-            {
-            currentJumpTime += Time.deltaTime;
-            rb.AddForce(Vector2.up * 500);
-            }
+            DisplayPercent(0);
+            _expulsionPercentage.setCharacterExpulsionPercentage(0);
+            vp.dead = false;
         }
-        
-  
-        if((remainingJumps == 0))
+        if (isJumping)
         {
-            if (checkIfGrounded())
+            if (currentJumpTime < 0.5f)
             {
-                isJumping = false;
-                resetJump();
-            }
-        }
+                currentJumpTime += Time.deltaTime;
+                rb.AddForce(Vector2.up * 200);
 
-
-        if(isMoving)
-        {
-            transform.Translate((moveDirection * Time.deltaTime * 10));
-        }
-        
-        if(isSimpleAttack)
-        {
-            elapsedTime += Time.deltaTime;
-            if (elapsedTime < simpleAttackDuration)
-            {
-                moveArms();
-                checkArmsCollisions();
-            }
-            else
-            {
-                endAttack();
             }
         }
-
-        if(isBigAttack)
+            
+        if ((remainingJumps == 0))
         {
-            elapsedTime += Time.deltaTime;
-             if (elapsedTime < bigAttackDuration)
-            {
-                moveArms();
-                checkArmsCollisions();
-            }
-            else
-            {
-                endAttack();
-            }
-        }
-
-        if(isJumpAttack)
-        {
-            if(checkIfGrounded())
-            {
-                isJumpAttack = false;
-               // bodyCollider.enabled = false;
-            }
-            else
-            {
-                rb.AddForce(Vector2.down * 500);
-                Collider2D leftHit = Physics2D.OverlapBox(this.transform.position, new Vector2(4,4), LayerMask.GetMask("Player"));
-                if (leftHit.transform.gameObject.GetComponent<character>() != null)
+                if (checkIfGrounded())
                 {
-                    if(leftHit.transform.gameObject != this.gameObject)
+                    isJumping = false;
+                    resetJump();
+                }
+        }
+        
+        
+        if (isMoving)
+        {
+                transform.Translate((moveDirection * Time.deltaTime * 10));
+        }
+
+            
+        if (isSimpleAttack)   
+        {
+                moveArms();
+                checkArmsCollisions();
+                endAttack();
+
+            
+        }
+
+            
+        if (isBigAttack)
+        {
+                moveArms();
+                checkArmsCollisions();
+                endAttack();
+            
+        }
+
+           
+        if (isJumpAttack)
+            {
+                if (checkIfGrounded())
+                {
+                    isJumpAttack = false;
+                    // bodyCollider.enabled = false;
+                }
+                else
+                {
+                    rb.AddForce(Vector2.down * 2000);
+                    Collider2D leftHit = Physics2D.OverlapBox(this.transform.position, new Vector2(4, 4), LayerMask.GetMask("Player"));
+                    if (leftHit.transform.gameObject.GetComponent<character>() != null)
                     {
-                       isJumpAttack = false;
-                       sendHit(leftHit.transform.gameObject.GetComponent<character>(), Vector2.up * 5);
+                        if (leftHit.transform.gameObject != this.gameObject)
+                        {
+                            isJumpAttack = false;
+                            sendHit(leftHit.transform.gameObject.GetComponent<character>(), Vector2.up * 20);
+                        }
                     }
                 }
-            }
+            
         }
+        
     }
-
    public void Jump()
 {
     if (remainingJumps > 0)
     {
         rb.velocity = new Vector2(rb.velocity.x, 0f);
-        rb.AddForce(Vector2.up * 500, ForceMode2D.Impulse);
+        rb.AddForce(Vector2.up * 2000, ForceMode2D.Impulse);
         remainingJumps--;
         isJumping = true;
     }
@@ -221,7 +217,7 @@ public class character : MonoBehaviour
 
    public void swapPosition()
 {
-    if (!isSimpleAttack && !isBigAttack && !isJumpAttack)
+    if (!isSimpleAttack && !isBigAttack && !isJumpAttack && checkIfGrounded())
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
@@ -249,7 +245,6 @@ public class character : MonoBehaviour
                 Vector2 positionBuffer =  this.gameObject.transform.position;
                 this.gameObject.transform.position = closestPlayer.transform.position;
                 closestPlayer.transform.position = positionBuffer;
-                Debug.Log("Téléportation effectuée");
             }
             else
             {
@@ -281,17 +276,15 @@ public class character : MonoBehaviour
     {
         Collider2D leftHit = Physics2D.OverlapBox(leftArm.transform.position, leftArm.size, LayerMask.GetMask("Player"));    
         Collider2D rightHit = Physics2D.OverlapBox(rightArm.transform.position, rightArm.size, LayerMask.GetMask("Player"));
-        if (leftHit != null || rightHit != null)
+        print(leftHit.gameObject.GetComponent<character>());
+        print(rightHit.gameObject.GetComponent<character>());
+        if(leftHit.gameObject != this.gameObject || leftHit != null)
         {
-            if(leftHit.gameObject != this.gameObject)
-            {
-                sendHit(leftHit.gameObject.GetComponent<character>(), lastMoveValue);
-            }
-            else if(rightHit.gameObject != this.gameObject)
-            {
-                sendHit(rightHit.gameObject.GetComponent<character>(), lastMoveValue);
-            }
-            
+            sendHit(leftHit.gameObject.GetComponent<character>(), lastMoveValue);
+        }
+        if (rightHit.gameObject != this.gameObject || rightHit != null)
+        {
+            sendHit(rightHit.gameObject.GetComponent<character>(), lastMoveValue);
         }
     }
 
@@ -307,7 +300,8 @@ public class character : MonoBehaviour
         isBigAttack = false;
         isJumpAttack = false;
         elapsedTime = 0f;
-        flipFlopArmsColliders(false);
+        //flipFlopArmsColliders(false);
+        print("attack fini");
     }
     public void simpleAttack()
     {
@@ -361,10 +355,26 @@ public class character : MonoBehaviour
         rightArm.enabled = activate;
     }
 
-     void OnDrawGizmos()
+    void ApplyColor()
     {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(this.transform.position, new Vector3(4,4, 0f));
+        SpriteRenderer spritePlayer = this.GetComponentInChildren<SpriteRenderer>();
+        switch (index)
+        {
+            case 1:
+                spritePlayer.color = Color.blue;
+                break;
+            case 2:
+                spritePlayer.color = Color.red;
+                break;
+            case 3:
+                spritePlayer.color = Color.green;
+                break;
+            case 4:
+                spritePlayer.color = Color.yellow;
+                break;
+            default:
+                spritePlayer.color = Color.black;
+                break;
+        }
     }
-
 }

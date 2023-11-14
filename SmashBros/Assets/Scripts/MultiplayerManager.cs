@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 
 public class MultiplayerManager : MonoBehaviour
 {
-    public static int playerIndex;
+    public int playerIndex;
     private bool[] spawnPointsOccupied;
     public Transform[] spawnPoints;
     public int Nbplayer;

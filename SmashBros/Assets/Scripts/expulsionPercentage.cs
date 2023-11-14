@@ -6,6 +6,10 @@ public class expulsionPercentage : MonoBehaviour
 {
     public float characterExpulsionPercentage;
 
+    private void Start()
+    {
+        setCharacterExpulsionPercentage(0);
+    }
     public float getCharacterExpulsionPercentage()
     {
         return characterExpulsionPercentage;
@@ -19,6 +23,7 @@ public class expulsionPercentage : MonoBehaviour
     public void addCharacterExpulsionPercentage(float percentageToAdd)
     {
         characterExpulsionPercentage += percentageToAdd;
+
     }
 
 }
