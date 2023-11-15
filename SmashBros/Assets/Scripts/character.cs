@@ -14,7 +14,7 @@ public class character : MonoBehaviour
 {
     private expulsionPercentage _expulsionPercentage;
     private Rigidbody2D rb;
-    private int powerOffset = 1;
+    private int powerOffset = 0;
 
    // private bool checkIfGrounded;
     private int remainingJumps;
@@ -22,15 +22,15 @@ public class character : MonoBehaviour
     private float currentJumpTime = 0;
     private bool isMoving = false;
     private Vector3 moveDirection = new Vector3();
-    private float elapsedTime = 0f;
 
     private Vector2 lastMoveValue;
-
-    public BoxCollider2D leftArm;
-    public BoxCollider2D rightArm;
+    public float raycastDistance;
 
     public float simpleAttackDuration = 0.3f;
     public float bigAttackDuration = 0.7f;
+
+    GameObject playerTouch;
+    bool canattack;
 
     private bool isSimpleAttack = false;
     private bool isBigAttack = false;
@@ -57,7 +57,6 @@ public class character : MonoBehaviour
         _expulsionPercentage = GetComponent<expulsionPercentage>();
         percent = GameObject.Find("P" + index + " %").GetComponent<Text>();
         rb = GetComponent<Rigidbody2D>();
-        ApplyColor();
     }
     private void sendHit(character ennemieHitted, Vector3 hitDirection)
     {
@@ -71,24 +70,24 @@ public class character : MonoBehaviour
 
     public void hitReceveid(int _powerOffset, Vector3 hitDirection)
     {
-        float hitPercentage = 0;
+        int hitPercentage = 0;
         switch (_powerOffset)
         {
             default:
-                hitPercentage = 5;
+                hitPercentage = 25;
                 break;
 
             case 1:
-                hitPercentage = 10;
+                hitPercentage = 50;
                 break;
 
             case 2:
-                hitPercentage = 13;
+                hitPercentage = 13*5;
                 break;
         }
         _expulsionPercentage.addCharacterExpulsionPercentage(hitPercentage);
-        DisplayPercent(_expulsionPercentage.getCharacterExpulsionPercentage()/10);
-        addForceByhit(_powerOffset, hitDirection);
+        DisplayPercent(_expulsionPercentage.getCharacterExpulsionPercentage()/5);
+        addForceByhit(hitPercentage, hitDirection);
         
     }
     public void DisplayPercent(float Addnb)
@@ -97,13 +96,13 @@ public class character : MonoBehaviour
     }
     private void addForceByhit(int _powerOffset, Vector3 hitDirection)
     {
-        rb.AddForce(hitDirection * (((_powerOffset * (_expulsionPercentage.getCharacterExpulsionPercentage()*20)))), ForceMode2D.Force);
+        rb.AddForce(hitDirection * ((_powerOffset * _expulsionPercentage.getCharacterExpulsionPercentage())/2), ForceMode2D.Force);
     }
 
     public void move(Vector2 inputAxis)
     {
         moveDirection = Vector2.right;
-        lastMoveValue = inputAxis + new Vector2(inputAxis.x * 5,1 + inputAxis.y * 5);
+        lastMoveValue = inputAxis + new Vector2(inputAxis.x * 10f,1 + inputAxis.y * 10f);
         if(inputAxis.x > 0)
         {
             this.gameObject.transform.eulerAngles = new Vector2(0,0);
@@ -122,7 +121,6 @@ public class character : MonoBehaviour
 
     private void Update()
     {
-        print(vp.dead);
         if(vp.dead)
         {
             DisplayPercent(0);
@@ -157,11 +155,8 @@ public class character : MonoBehaviour
             
         if (isSimpleAttack)   
         {
-                moveArms();
                 checkArmsCollisions();
                 endAttack();
-
-            
         }
 
             
@@ -170,7 +165,6 @@ public class character : MonoBehaviour
                 moveArms();
                 checkArmsCollisions();
                 endAttack();
-            
         }
 
            
@@ -190,7 +184,7 @@ public class character : MonoBehaviour
                         if (leftHit.transform.gameObject != this.gameObject)
                         {
                             isJumpAttack = false;
-                            sendHit(leftHit.transform.gameObject.GetComponent<character>(), Vector2.up * 20);
+                            sendHit(leftHit.transform.gameObject.GetComponent<character>(), Vector2.up * 5);
                         }
                     }
                 }
@@ -260,7 +254,6 @@ public class character : MonoBehaviour
 
     private bool checkIfGrounded()
     {
-        float raycastDistance = 1f;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, raycastDistance, LayerMask.GetMask("Ground"));
         return hit.collider != null;
     }
@@ -274,20 +267,25 @@ public class character : MonoBehaviour
 
     void checkArmsCollisions()
     {
-        Collider2D leftHit = Physics2D.OverlapBox(leftArm.transform.position, leftArm.size, LayerMask.GetMask("Player"));    
-        Collider2D rightHit = Physics2D.OverlapBox(rightArm.transform.position, rightArm.size, LayerMask.GetMask("Player"));
-        print(leftHit.gameObject.GetComponent<character>());
-        print(rightHit.gameObject.GetComponent<character>());
-        if(leftHit.gameObject != this.gameObject || leftHit != null)
+        if (canattack)
         {
-            sendHit(leftHit.gameObject.GetComponent<character>(), lastMoveValue);
-        }
-        if (rightHit.gameObject != this.gameObject || rightHit != null)
-        {
-            sendHit(rightHit.gameObject.GetComponent<character>(), lastMoveValue);
+            sendHit(playerTouch.GetComponent<character>(), lastMoveValue);
         }
     }
 
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            canattack = true;
+            playerTouch = collision.gameObject;
+        }
+        else
+        {
+            canattack = false;
+            playerTouch = null;
+        }
+    }
     void resetArmPositions()
     {
         //faudra reset la position des bras si on garde ce systeme
@@ -299,18 +297,13 @@ public class character : MonoBehaviour
         isSimpleAttack = false;
         isBigAttack = false;
         isJumpAttack = false;
-        elapsedTime = 0f;
-        //flipFlopArmsColliders(false);
-        print("attack fini");
     }
     public void simpleAttack()
     {
              if(!isSimpleAttack && !isBigAttack && !isJumpAttack)
             {
                 isSimpleAttack = true;
-                elapsedTime = 0f;
-                powerOffset = 1;
-                flipFlopArmsColliders(true);
+                powerOffset = 0;
             }
     }
 
@@ -318,12 +311,10 @@ public class character : MonoBehaviour
     {
         if(checkIfGrounded())
         {
-             if(!isSimpleAttack && !isBigAttack && !isJumpAttack)
+            if (!isSimpleAttack && !isBigAttack && !isJumpAttack)
             {
                 isBigAttack = true;
-                elapsedTime = 0f;
-                powerOffset = 2;
-                flipFlopArmsColliders(true);
+                powerOffset = 1;
             }
         }
         else
@@ -338,7 +329,6 @@ public class character : MonoBehaviour
     public void jumpAttack()
     {
         isJumpAttack = true;
-        elapsedTime = 0f;
         powerOffset = 2;
         rb.AddForce(Vector2.down * 1500, ForceMode2D.Impulse);
     }
@@ -349,32 +339,5 @@ public class character : MonoBehaviour
         //faire animation
     }
 
-     void flipFlopArmsColliders(bool activate)
-    {
-        leftArm.enabled = activate;
-        rightArm.enabled = activate;
-    }
-
-    void ApplyColor()
-    {
-        SpriteRenderer spritePlayer = this.GetComponentInChildren<SpriteRenderer>();
-        switch (index)
-        {
-            case 1:
-                spritePlayer.color = Color.blue;
-                break;
-            case 2:
-                spritePlayer.color = Color.red;
-                break;
-            case 3:
-                spritePlayer.color = Color.green;
-                break;
-            case 4:
-                spritePlayer.color = Color.yellow;
-                break;
-            default:
-                spritePlayer.color = Color.black;
-                break;
-        }
-    }
+    
 }

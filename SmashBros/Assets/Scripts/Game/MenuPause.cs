@@ -1,16 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MenuPause : MonoBehaviour
 {
+    public GameObject pauseMenu;
     private void Update()
     {
-        if(this.gameObject.activeSelf)
+        if(Gamepad.current.startButton.wasPressedThisFrame)
         {
-            Time.timeScale = 0;
+            OpenPause();
         }
+    }
+    void OpenPause()
+    {
+        pauseMenu.SetActive(true);
+        pauseMenu.GetComponentInChildren<Button>().Select();
+        Time.timeScale = 0;
     }
     public void Replay()
     {
@@ -19,7 +28,7 @@ public class MenuPause : MonoBehaviour
     public void Continue()
     {
         Time.timeScale = 1.0f;
-        this.gameObject.SetActive(false);
+        pauseMenu.gameObject.SetActive(false);
     }
     public void Menu()
     {

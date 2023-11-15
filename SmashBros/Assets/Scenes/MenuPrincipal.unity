@@ -1771,7 +1771,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0
-  m_Text: Splatsh bros
+  m_Text: Smash bros
 --- !u!222 &676450058
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4160,7 +4160,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Option
+  m_Text: Options
 --- !u!222 &2140771093
 CanvasRenderer:
   m_ObjectHideFlags: 0

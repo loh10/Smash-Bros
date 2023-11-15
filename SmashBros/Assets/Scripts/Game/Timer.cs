@@ -4,11 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Timer : MonoBehaviour
 {
-    float timer = 179;
+    public float timer = 179;
     Text timerText;
     public GameObject victoryMenu;
+    MultiplayerManager mpm;
     private void Awake()
     {
+        mpm = GameObject.Find("EventManager").GetComponent<MultiplayerManager>();
         timerText = GetComponent<Text>();
         victoryMenu.SetActive(false);
     }
@@ -18,14 +20,15 @@ public class Timer : MonoBehaviour
     }
     void CheckTime()
     {
-        timer -= Time.deltaTime;
-        float timeminute = Mathf.Floor(timer / 60);
-        float timeseconde = timer % 60;
-        timerText.text = (timeminute + ":" + Mathf.RoundToInt(timeseconde)).ToString();
-        if (timer <= 0)
+        if(mpm.Nbplayer>0)
         {
-            Time.timeScale = 0;
-            victoryMenu.SetActive(true);
+            timer -= Time.deltaTime;
+            timerText.text = ((int)timer).ToString();
+            if (timer <= 0)
+            {
+                Time.timeScale = 0;
+                victoryMenu.SetActive(true);
+            }
         }
     }
 }

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+using UnityEngine.InputSystem;
 public class MenuManager : MonoBehaviour
 {
     public GameObject menuOption;
@@ -12,6 +12,13 @@ public class MenuManager : MonoBehaviour
     void Awake()
     {
         menuOption.SetActive(false);
+    }
+    private void Update()
+    {
+        if(Gamepad.current.buttonEast.wasPressedThisFrame)
+        {
+            CloseOption();
+        }
     }
     public void OpenOption()
     {

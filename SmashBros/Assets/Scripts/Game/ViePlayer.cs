@@ -14,10 +14,14 @@ public class ViePlayer : MonoBehaviour
 
     private void Awake()
     {
+        Time.timeScale = 1;
         mpm = GameObject.Find("EventManager").GetComponent<MultiplayerManager>();
         AddAllLife();
     }
-
+    private void Start()
+    {
+        ActivateInput(this.GetComponent<PlayerInput>());
+    }
     private void AddAllLife()
     {
         for (int i = 1; i < 4; i++)
@@ -53,6 +57,11 @@ public class ViePlayer : MonoBehaviour
     void DesactivateInput(PlayerInput playerInput)
     {
         playerInput.DeactivateInput();
+    }
+
+    void ActivateInput(PlayerInput playerInput)
+    {
+        playerInput.ActivateInput();
     }
     private void UpdateLife()
     {
