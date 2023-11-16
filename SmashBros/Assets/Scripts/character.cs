@@ -58,6 +58,10 @@ public class character : MonoBehaviour
         percent = GameObject.Find("P" + index + " %").GetComponent<Text>();
         rb = GetComponent<Rigidbody2D>();
     }
+    private void Start()
+    {
+        this.gameObject.name = "player "+index.ToString();
+    }
     private void sendHit(character ennemieHitted, Vector3 hitDirection)
     {
         
@@ -121,11 +125,11 @@ public class character : MonoBehaviour
 
     private void Update()
     {
-        if(vp.dead)
+        if(vp.ejected)
         {
             DisplayPercent(0);
             _expulsionPercentage.setCharacterExpulsionPercentage(0);
-            vp.dead = false;
+            vp.ejected = false;
         }
         if (isJumping)
         {

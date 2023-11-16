@@ -8,9 +8,10 @@ using UnityEngine.UI;
 public class ViePlayer : MonoBehaviour
 {
     public MultiplayerManager mpm;
-    int currentLife = 3;
+    public int currentLife = 3;
     public List<Transform> Vie;
     public bool dead;
+    public bool ejected;
 
     private void Awake()
     {
@@ -36,6 +37,7 @@ public class ViePlayer : MonoBehaviour
         {
             if (currentLife == 1)
             {
+                currentLife--;
                 clearLife();
                 DesactivateInput(this.GetComponent<PlayerInput>());
                 this.gameObject.transform.position = new Vector2(1000, 1000);
@@ -46,8 +48,8 @@ public class ViePlayer : MonoBehaviour
             else
             {
                 this.gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-                dead = true;
                 currentLife--;
+                ejected = true;
                 UpdateLife();
                 this.gameObject.transform.position = Vector3.zero;
             }

@@ -388,7 +388,7 @@ GameObject:
   - component: {fileID: 152263109}
   - component: {fileID: 152263108}
   m_Layer: 5
-  m_Name: Defaite3
+  m_Name: joueur4Txt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -407,11 +407,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1495648025}
-  m_Father: {fileID: 218521379}
+  m_Father: {fileID: 922592816}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 50, y: -350}
+  m_AnchoredPosition: {x: 536, y: 250}
   m_SizeDelta: {x: 350, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &152263108
@@ -441,13 +441,13 @@ MonoBehaviour:
     m_BestFit: 1
     m_MinSize: 3
     m_MaxSize: 300
-    m_Alignment: 0
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Player 4
+  m_Text: Joueur 4
 --- !u!222 &152263109
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -761,88 +761,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!1 &218521378
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 218521379}
-  - component: {fileID: 218521381}
-  - component: {fileID: 218521380}
-  m_Layer: 5
-  m_Name: "D\xE9faiteTitre"
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
---- !u!224 &218521379
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 218521378}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 730666961}
-  - {fileID: 1336514474}
-  - {fileID: 152263107}
-  m_Father: {fileID: 922592816}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -600, y: 50}
-  m_SizeDelta: {x: 300, y: 200}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &218521380
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 218521378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.069811285, b: 0.1081565, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 12800000, guid: d2ccd53896542c64d91cfb4b915ecae7, type: 3}
-    m_FontSize: 100
-    m_FontStyle: 0
-    m_BestFit: 1
-    m_MinSize: 1
-    m_MaxSize: 101
-    m_Alignment: 4
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: "D\xE9faite"
---- !u!222 &218521381
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 218521378}
-  m_CullTransparentMesh: 1
 --- !u!1 &229896422
 GameObject:
   m_ObjectHideFlags: 0
@@ -926,7 +844,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 922592817}
+      - m_Target: {fileID: 1357336987}
         m_TargetAssemblyTypeName: MenuPause, Assembly-CSharp
         m_MethodName: Menu
         m_Mode: 1
@@ -988,7 +906,7 @@ GameObject:
   - component: {fileID: 236033527}
   - component: {fileID: 236033526}
   m_Layer: 5
-  m_Name: nbMortGagnant
+  m_Name: nbMort1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1010,7 +928,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 434, y: 0.000015258789}
+  m_AnchoredPosition: {x: -7.0000153, y: -87}
   m_SizeDelta: {x: 350, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &236033526
@@ -1040,13 +958,13 @@ MonoBehaviour:
     m_BestFit: 1
     m_MinSize: 3
     m_MaxSize: 300
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10
+  m_Text: X
 --- !u!222 &236033527
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1529,7 +1447,7 @@ GameObject:
   - component: {fileID: 611117838}
   - component: {fileID: 611117837}
   m_Layer: 5
-  m_Name: vie2
+  m_Name: P2vie2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1641,7 +1559,7 @@ GameObject:
   - component: {fileID: 718596588}
   - component: {fileID: 718596587}
   m_Layer: 5
-  m_Name: gagnatText
+  m_Name: joueur1Txt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1654,17 +1572,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 718596585}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 236033525}
-  m_Father: {fileID: 1858016115}
+  m_Father: {fileID: 922592816}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 50, y: -150}
+  m_AnchoredPosition: {x: -564, y: 250.00003}
   m_SizeDelta: {x: 350, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &718596587
@@ -1694,13 +1612,13 @@ MonoBehaviour:
     m_BestFit: 1
     m_MinSize: 3
     m_MaxSize: 300
-    m_Alignment: 0
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Player1
+  m_Text: Joueur 1
 --- !u!222 &718596588
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1721,7 +1639,7 @@ GameObject:
   - component: {fileID: 730666963}
   - component: {fileID: 730666962}
   m_Layer: 5
-  m_Name: Defaite1
+  m_Name: joueur2Txt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1740,11 +1658,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 952337476}
-  m_Father: {fileID: 218521379}
+  m_Father: {fileID: 922592816}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 50, y: -150}
+  m_AnchoredPosition: {x: -214, y: 250}
   m_SizeDelta: {x: 350, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &730666962
@@ -1774,13 +1692,13 @@ MonoBehaviour:
     m_BestFit: 1
     m_MinSize: 3
     m_MaxSize: 300
-    m_Alignment: 0
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Player 2
+  m_Text: Joueur 2
 --- !u!222 &730666963
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2104,7 +2022,7 @@ GameObject:
   - component: {fileID: 827017122}
   - component: {fileID: 827017121}
   m_Layer: 5
-  m_Name: vie1
+  m_Name: P3vie1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2179,7 +2097,7 @@ GameObject:
   - component: {fileID: 849203318}
   - component: {fileID: 849203317}
   m_Layer: 5
-  m_Name: vie2
+  m_Name: P4vie2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2331,7 +2249,7 @@ GameObject:
   - component: {fileID: 896220281}
   - component: {fileID: 896220280}
   m_Layer: 5
-  m_Name: vie2
+  m_Name: P3vie2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2406,14 +2324,14 @@ GameObject:
   - component: {fileID: 922592820}
   - component: {fileID: 922592819}
   - component: {fileID: 922592818}
-  - component: {fileID: 922592817}
+  - component: {fileID: 922592821}
   m_Layer: 5
-  m_Name: vitoireMenu
+  m_Name: victoireMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &922592816
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2427,9 +2345,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 609961603}
-  - {fileID: 1763985653}
+  - {fileID: 718596586}
+  - {fileID: 730666961}
+  - {fileID: 1336514474}
+  - {fileID: 152263107}
   - {fileID: 1858016115}
-  - {fileID: 218521379}
   - {fileID: 1282672458}
   m_Father: {fileID: 2097937474}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2438,19 +2358,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &922592817
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 922592815}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2ee3a9f0a57e5841be3ecb5393e78ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pauseMenu: {fileID: 0}
 --- !u!114 &922592818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2514,6 +2421,22 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &922592821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 922592815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6da4f64951b00446847f99a8f530cd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerName: []
+  playerNbVie: []
+  actPlayer: 0
+  maxPlayer: 0
 --- !u!1 &930100327
 GameObject:
   m_ObjectHideFlags: 0
@@ -2729,7 +2652,7 @@ GameObject:
   - component: {fileID: 952337478}
   - component: {fileID: 952337477}
   m_Layer: 5
-  m_Name: nbMort1
+  m_Name: nbMort2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2751,7 +2674,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 434, y: 0.000015258789}
+  m_AnchoredPosition: {x: -4.0000153, y: -81}
   m_SizeDelta: {x: 350, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &952337477
@@ -2781,13 +2704,13 @@ MonoBehaviour:
     m_BestFit: 1
     m_MinSize: 3
     m_MaxSize: 300
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10
+  m_Text: X
 --- !u!222 &952337478
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3304,7 +3227,7 @@ GameObject:
   - component: {fileID: 1089320783}
   - component: {fileID: 1089320782}
   m_Layer: 5
-  m_Name: vie3
+  m_Name: P4vie3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3417,7 +3340,7 @@ GameObject:
   - component: {fileID: 1208542963}
   - component: {fileID: 1208542962}
   m_Layer: 5
-  m_Name: vie3
+  m_Name: P2vie3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3638,7 +3561,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 922592817}
+      - m_Target: {fileID: 1357336987}
         m_TargetAssemblyTypeName: MenuPause, Assembly-CSharp
         m_MethodName: Replay
         m_Mode: 1
@@ -3853,7 +3776,7 @@ GameObject:
   - component: {fileID: 1336514476}
   - component: {fileID: 1336514475}
   m_Layer: 5
-  m_Name: Defaite2
+  m_Name: joueur3Txt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3872,11 +3795,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1902831860}
-  m_Father: {fileID: 218521379}
+  m_Father: {fileID: 922592816}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 50, y: -250}
+  m_AnchoredPosition: {x: 186, y: 250}
   m_SizeDelta: {x: 350, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1336514475
@@ -3906,13 +3829,13 @@ MonoBehaviour:
     m_BestFit: 1
     m_MinSize: 3
     m_MaxSize: 300
-    m_Alignment: 0
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Player 3
+  m_Text: Joueur 3
 --- !u!222 &1336514476
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3933,7 +3856,7 @@ GameObject:
   - component: {fileID: 1341142953}
   - component: {fileID: 1341142952}
   m_Layer: 5
-  m_Name: vie1
+  m_Name: P2vie1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4116,6 +4039,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2ee3a9f0a57e5841be3ecb5393e78ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mpm: {fileID: 0}
   pauseMenu: {fileID: 930100327}
 --- !u!1 &1436263669
 GameObject:
@@ -4262,7 +4186,7 @@ GameObject:
   - component: {fileID: 1495648027}
   - component: {fileID: 1495648026}
   m_Layer: 5
-  m_Name: nbMort3
+  m_Name: nbMort4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4284,7 +4208,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 434, y: 0.000030517578}
+  m_AnchoredPosition: {x: -7, y: -78}
   m_SizeDelta: {x: 350, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1495648026
@@ -4314,13 +4238,13 @@ MonoBehaviour:
     m_BestFit: 1
     m_MinSize: 3
     m_MaxSize: 300
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10
+  m_Text: X
 --- !u!222 &1495648027
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4582,8 +4506,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22a22bb8c1400e84a9b057437a44c57e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 180
+  timer: 100
+  actTime: 0
   victoryMenu: {fileID: 922592815}
+  victory: 0
 --- !u!1 &1652061389
 GameObject:
   m_ObjectHideFlags: 0
@@ -4675,7 +4601,7 @@ GameObject:
   - component: {fileID: 1697390864}
   - component: {fileID: 1697390863}
   m_Layer: 5
-  m_Name: vie1
+  m_Name: P4vie1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5056,85 +4982,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1747434202}
   m_CullTransparentMesh: 1
---- !u!1 &1763985652
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1763985653}
-  - component: {fileID: 1763985655}
-  - component: {fileID: 1763985654}
-  m_Layer: 5
-  m_Name: nbMortTitre
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
---- !u!224 &1763985653
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1763985652}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 922592816}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -252, y: 386}
-  m_SizeDelta: {x: 300, y: 200}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1763985654
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1763985652}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 12800000, guid: d2ccd53896542c64d91cfb4b915ecae7, type: 3}
-    m_FontSize: 50
-    m_FontStyle: 0
-    m_BestFit: 1
-    m_MinSize: 1
-    m_MaxSize: 50
-    m_Alignment: 4
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: Nombre de mort
---- !u!222 &1763985655
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1763985652}
-  m_CullTransparentMesh: 1
 --- !u!1 &1764325224
 GameObject:
   m_ObjectHideFlags: 0
@@ -5147,7 +4994,7 @@ GameObject:
   - component: {fileID: 1764325227}
   - component: {fileID: 1764325226}
   m_Layer: 5
-  m_Name: vie3
+  m_Name: P3vie3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5355,15 +5202,14 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 718596586}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
   m_Father: {fileID: 922592816}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -600, y: 400}
-  m_SizeDelta: {x: 300, y: 200}
+  m_AnchoredPosition: {x: -11, y: 400}
+  m_SizeDelta: {x: 250, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1858016116
 MonoBehaviour:
@@ -5378,7 +5224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2758339, g: 1, b: 0.1830188, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5398,7 +5244,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Victoire
+  m_Text: Fin
 --- !u!222 &1858016117
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5419,7 +5265,7 @@ GameObject:
   - component: {fileID: 1902831862}
   - component: {fileID: 1902831861}
   m_Layer: 5
-  m_Name: nbMort2
+  m_Name: nbMort3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5441,7 +5287,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 434, y: 0}
+  m_AnchoredPosition: {x: -7.0000305, y: -84}
   m_SizeDelta: {x: 350, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1902831861
@@ -5471,13 +5317,13 @@ MonoBehaviour:
     m_BestFit: 1
     m_MinSize: 3
     m_MaxSize: 300
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10
+  m_Text: X
 --- !u!222 &1902831862
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5513,7 +5359,7 @@ RectTransform:
   m_GameObject: {fileID: 1938215623}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 930100328}
