@@ -18,9 +18,13 @@ public class MenuPause : MonoBehaviour
     {
         if(mpm.Nbplayer>=1)
         {
-            if (Gamepad.current.startButton.wasPressedThisFrame)
+            if (Gamepad.current.startButton.wasPressedThisFrame && !pauseMenu.activeSelf)
             {
                 OpenPause();
+            }
+            else if(Gamepad.current.startButton.wasPressedThisFrame && pauseMenu.activeSelf)
+            {
+                Continue();
             }
         }
     }
