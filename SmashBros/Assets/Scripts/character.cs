@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
-
+using System.Diagnostics;
 
 public class character : MonoBehaviour
 {
@@ -67,6 +67,7 @@ public class character : MonoBehaviour
     private void Start()
     {
         this.gameObject.name = "player "+index.ToString();
+        ApplyColor();
     }
     private void sendHit(character ennemieHitted, Vector3 hitDirection)
     {
@@ -107,12 +108,12 @@ public class character : MonoBehaviour
     }
     private void addForceByhit(int _powerOffset, Vector3 hitDirection)
     {
-        rb.AddForce(hitDirection * ((_powerOffset * _expulsionPercentage.getCharacterExpulsionPercentage())/2), ForceMode2D.Force);
+        rb.AddForce(hitDirection * (_powerOffset * _expulsionPercentage.getCharacterExpulsionPercentage()/2)*dataTransfer.ejectionDistance, ForceMode2D.Force);
     }
 
     public void move(Vector2 inputAxis)
     {
-        moveDirection = Vector2.right;
+        moveDirection = Vector2.right*dataTransfer.speed;
         lastMoveValue = inputAxis + new Vector2(inputAxis.x * 10f,1 + inputAxis.y * 10f);
         if(inputAxis.x > 0)
         {
@@ -146,11 +147,8 @@ public class character : MonoBehaviour
             if (currentJumpTime < 0.5f)
             {
                 currentJumpTime += Time.deltaTime;
-                rb.AddForce(Vector2.up * 200);
-
+                rb.AddForce((Vector2.up * 200*dataTransfer.maxJumpHeight)/2);
             }
-
-
         }
             
         if ((remainingJumps == 0))
@@ -178,13 +176,12 @@ public class character : MonoBehaviour
             
         if (isBigAttack)
         {
-                moveArms();
                 checkArmsCollisions();
                 endAttack();
         }
 
            
-        if (isJumpAttack)
+        if (isJumpAttack&&!vp.ejected)
             {
                 if (checkIfGrounded())
                 {
@@ -210,10 +207,10 @@ public class character : MonoBehaviour
     }
    public void Jump()
    {
-    if (remainingJumps > 0)
-    {
+        if (remainingJumps > 0)
+        {
         rb.velocity = new Vector2(rb.velocity.x, 0f);
-        rb.AddForce(Vector2.up * 2000, ForceMode2D.Impulse);
+        rb.AddForce((Vector2.up * 2000)*dataTransfer.maxJumpHeight, ForceMode2D.Impulse);
         remainingJumps--;
         isJumping = true;
         }
@@ -224,7 +221,6 @@ public class character : MonoBehaviour
     {
        isJumping = false;
        currentJumpTime = 0;
-
     }
 
 
@@ -306,12 +302,6 @@ public class character : MonoBehaviour
             playerTouch = null;
         }
     }
-    void resetArmPositions()
-    {
-        //faudra reset la position des bras si on garde ce systeme
-       // leftArm.position = 
-        //rightArm.position = 
-    }
     void endAttack()
     {
         isSimpleAttack = false;
@@ -356,14 +346,29 @@ public class character : MonoBehaviour
         rb.AddForce(Vector2.down * 1500, ForceMode2D.Impulse);
         anim.SetBool("Down_Charge", true);
     }
-
-
-    void moveArms()
+    void ApplyColor()
     {
-        //faire animation
+        Color couleur;
+        switch(index)
+        {
+            case 1:
+                couleur = Color.white;
+                break;
+            case 2:
+                couleur = Color.red;
+                break;
+            case 3:
+                couleur = Color.green;
+                break;
+            case 4:
+                couleur = Color.yellow;
+                break;
+            default:
+                couleur = Color.black;
+                break;
+        }
+        this.gameObject.GetComponent<SpriteRenderer>().color = couleur;
     }
-
-
     private void animationInJump()
     {
         if (!coll.IsTouchingLayers(LayerMask.GetMask("Ground")))

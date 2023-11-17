@@ -17,7 +17,7 @@ public class VictoryMenu : MonoBehaviour
     {
         mpm = GameObject.Find("EventManager").GetComponent<MultiplayerManager>();
         timer = GameObject.Find("timer").GetComponent<Timer>();
-        replay.Select();
+        
     }
 
     
@@ -38,7 +38,8 @@ public class VictoryMenu : MonoBehaviour
 
     private void DisplayScore()
     {
-        for(int i = 0; i < maxPlayer;i++)
+        replay.Select();
+        for (int i = 0; i < maxPlayer;i++)
         {
             print("player " + i + 1);
             playerNbVie[i].text = GameObject.Find("player " + (i+1).ToString()).GetComponent<ViePlayer>().currentLife.ToString();
