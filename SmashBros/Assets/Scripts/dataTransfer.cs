@@ -10,4 +10,5 @@ public static class dataTransfer
     public static float stuntTime;
     public static float musicVolume;
     public static int maxJumpsCount;
+    public static float Volume;
 }

@@ -8,6 +8,7 @@ public class VictoryMenu : MonoBehaviour
 {
     public List<Text> playerName;
     public List<Text> playerNbVie;
+    public Button replay;
     MultiplayerManager mpm;
     Timer timer;
     public int actPlayer;
@@ -16,6 +17,7 @@ public class VictoryMenu : MonoBehaviour
     {
         mpm = GameObject.Find("EventManager").GetComponent<MultiplayerManager>();
         timer = GameObject.Find("timer").GetComponent<Timer>();
+        replay.Select();
     }
 
     

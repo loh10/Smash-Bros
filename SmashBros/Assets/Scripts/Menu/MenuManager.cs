@@ -15,9 +15,12 @@ public class MenuManager : MonoBehaviour
     }
     private void Update()
     {
-        if(Gamepad.current.buttonEast.wasPressedThisFrame)
+        if(menuOption.activeSelf)
         {
-            CloseOption();
+            if (Gamepad.current.buttonEast.wasPressedThisFrame)
+            {
+                CloseOption();
+            }
         }
     }
     public void OpenOption()
@@ -29,7 +32,7 @@ public class MenuManager : MonoBehaviour
     {
         dataTransfer.maxJumpHeight = (int)reglage[0].value;
         dataTransfer.maxJumpTime = (int)reglage[1].value;
-        int volume = (int)reglage[2].value;
+        dataTransfer.Volume = reglage[2].value;
         dataTransfer.ejectionDistance = (int)reglage[3].value;
         dataTransfer.stuntTime = (int)reglage[4].value;
     }
