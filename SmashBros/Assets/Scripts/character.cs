@@ -12,11 +12,14 @@ using UnityEngine.UIElements;
 
 public class character : MonoBehaviour
 {
+    Animator anim;
+    private string currentState;
+
     private expulsionPercentage _expulsionPercentage;
     private Rigidbody2D rb;
     private int powerOffset = 0;
 
-   // private bool checkIfGrounded;
+    private bool isGrounded = false;
     private int remainingJumps;
     private bool isJumping = false;
     private float currentJumpTime = 0;
@@ -40,6 +43,7 @@ public class character : MonoBehaviour
     int index;
     Text percent;
     ViePlayer vp;
+    [SerializeField] Collider2D coll;
     private enum characterState
 {
     Void,
@@ -52,6 +56,8 @@ public class character : MonoBehaviour
     
     private void Awake()
     {
+        coll = GetComponent<Collider2D>();
+        anim = gameObject.GetComponent<Animator>();
         vp = GetComponent<ViePlayer>();
         index = GameObject.Find("EventManager").GetComponent<MultiplayerManager>().playerIndex;
         _expulsionPercentage = GetComponent<expulsionPercentage>();
@@ -92,6 +98,7 @@ public class character : MonoBehaviour
         _expulsionPercentage.addCharacterExpulsionPercentage(hitPercentage);
         DisplayPercent(_expulsionPercentage.getCharacterExpulsionPercentage()/5);
         addForceByhit(hitPercentage, hitDirection);
+        anim.SetTrigger("Damaged");
         
     }
     public void DisplayPercent(float Addnb)
@@ -116,12 +123,15 @@ public class character : MonoBehaviour
             this.gameObject.transform.eulerAngles = new Vector2(0,180);        
         }
         isMoving = true;
+        anim.SetBool ("Run", true);
     }
 
     public void stopMove()
     {
         isMoving = false;
+        anim.SetBool ("Run", false);
     }
+
 
     private void Update()
     {
@@ -139,6 +149,8 @@ public class character : MonoBehaviour
                 rb.AddForce(Vector2.up * 200);
 
             }
+
+
         }
             
         if ((remainingJumps == 0))
@@ -194,24 +206,27 @@ public class character : MonoBehaviour
                 }
             
         }
-        
+        animationInJump();
     }
    public void Jump()
-{
+   {
     if (remainingJumps > 0)
     {
         rb.velocity = new Vector2(rb.velocity.x, 0f);
         rb.AddForce(Vector2.up * 2000, ForceMode2D.Impulse);
         remainingJumps--;
         isJumping = true;
+        }
+
     }
-}
 
     public void stopJump()
     {
        isJumping = false;
        currentJumpTime = 0;
+
     }
+
 
    public void swapPosition()
 {
@@ -243,6 +258,7 @@ public class character : MonoBehaviour
                 Vector2 positionBuffer =  this.gameObject.transform.position;
                 this.gameObject.transform.position = closestPlayer.transform.position;
                 closestPlayer.transform.position = positionBuffer;
+                    anim.SetTrigger("TP");
             }
             else
             {
@@ -256,7 +272,7 @@ public class character : MonoBehaviour
     }
 }
 
-    private bool checkIfGrounded()
+    public bool checkIfGrounded()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, raycastDistance, LayerMask.GetMask("Ground"));
         return hit.collider != null;
@@ -305,10 +321,12 @@ public class character : MonoBehaviour
     public void simpleAttack()
     {
              if(!isSimpleAttack && !isBigAttack && !isJumpAttack)
-            {
+             {
                 isSimpleAttack = true;
                 powerOffset = 0;
-            }
+                anim.SetTrigger("Light_Attack");
+             }
+
     }
 
     public void bigAttack()
@@ -319,6 +337,7 @@ public class character : MonoBehaviour
             {
                 isBigAttack = true;
                 powerOffset = 1;
+                anim.SetTrigger("Big_Attack");
             }
         }
         else
@@ -335,6 +354,7 @@ public class character : MonoBehaviour
         isJumpAttack = true;
         powerOffset = 2;
         rb.AddForce(Vector2.down * 1500, ForceMode2D.Impulse);
+        anim.SetBool("Down_Charge", true);
     }
 
 
@@ -343,5 +363,19 @@ public class character : MonoBehaviour
         //faire animation
     }
 
-    
+
+    private void animationInJump()
+    {
+        if (!coll.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        {
+            anim.SetBool("Jump", true);
+        }
+        else
+        {
+            anim.SetBool("Jump", false);
+            anim.SetBool("Down_Charge", false);
+            return;
+        }
+    }
+
 }
